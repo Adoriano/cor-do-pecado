@@ -1,106 +1,231 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Catalise Peso Pro ML</title>
-<meta name="theme-color" content="#12131A">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A COR DO PECADO - Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:wght@700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#12131A;--card:#232734;--card2:#2C303E;--areia:#E9D5B5;--areia2:#C9B896}
-body{font-family:system-ui;background:var(--bg);margin:0;padding:16px;padding-bottom:90px;color:var(--areia)}
-.top{background:var(--card);padding:16px;border-radius:16px;text-align:center;border:1px solid #3A3E4E}
-.card{background:var(--card);border-radius:18px;padding:18px;margin-top:12px;border:1px solid #3A3E4E}
-label{font-size:11px;font-weight:800;opacity:.7;margin-top:12px;display:block}
-select,input{width:100%;padding:14px;border-radius:12px;border:1px solid #3A3E4E;background:var(--card2);color:var(--areia);margin-top:6px;box-sizing:border-box;font-size:16px}
-.row{display:flex;gap:10px}
-.result{background:linear-gradient(135deg,#2C303E,#343848);border:1px solid var(--areia2);border-radius:18px;padding:20px;margin-top:14px}
-.big{font-size:28px;font-weight:900}
-.line{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(233,213,181,.1);font-size:14px}
-.btn{width:100%;background:var(--areia);color:#12131A;border:0;padding:16px;border-radius:14px;font-weight:900;margin-top:12px}
+*{box-sizing:border-box;font-family:'Inter',system-ui}body{margin:0;background:#0D0805;color:#F5E6D3;padding:10px;padding-bottom:100px}
+.logo{font-family:'Cinzel Decorative',serif;font-size:34px;text-align:center;background:linear-gradient(90deg,#8B5E34,#D4A96A,#FFF2CC,#D4A96A,#8B5E34);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px;text-shadow:0 0 30px rgba(212,169,106,.4);margin:10px 0 0}
+.sub{font-size:10px;letter-spacing:5px;text-align:center;color:#C9A87C;margin-bottom:14px;font-weight:700}
+.card{background:linear-gradient(180deg,#1E1610,#18100B);border:1px solid #3A2A1E;border-radius:22px;padding:16px;margin-bottom:12px}
+.top{font-size:10px;letter-spacing:2px;color:#D4A96A;font-weight:900;text-transform:uppercase;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #231A13}
+input,select,textarea{width:100%;background:#211912;border:1px solid #3A2A1E;color:#F5E6D3;border-radius:12px;padding:12px;font-weight:700;margin-top:6px}
+.btn{width:100%;border:0;border-radius:14px;padding:13px;font-weight:900;margin-top:8px;letter-spacing:1px}
+.btn-gold{background:linear-gradient(90deg,#D4A96A,#B07D46);color:#000}
+.btn-dark{background:#2A1E16;color:#C9A87C;border:1px solid #3A2A1E}
+.tab{display:flex;gap:6px;overflow:auto;padding-bottom:6px;position:sticky;top:0;background:#0D0805;z-index:10;padding-top:6px}
+.tabBtn{padding:10px 16px;border-radius:20px;border:1px solid #3A2A1E;background:#1C140E;color:#C9A87C;font-weight:800;white-space:nowrap}
+.tabBtn.ativo{background:linear-gradient(90deg,#D4A96A,#B07D46);color:#000;border-color:#D4A96A}
+.timer{font-size:46px;font-weight:900;text-align:center;font-family:'Playfair Display';color:#D4A96A}
+.badge{font-size:11px;background:#2A1E16;border:1px solid #3A2A1E;padding:6px 12px;border-radius:20px;color:#C9A87C}
+.hour{padding:8px 12px;border-radius:10px;border:1px solid #3A2A1E;background:#211912;color:#C9A87C;margin:3px;display:inline-block;font-size:12px;font-weight:800;cursor:pointer}
+.hour.ocupado{background:#3A1A1A;border-color:#5A2A2A;color:#FF8A8A;text-decoration:line-through}
+.hour.ativo{background:#D4A96A;color:#000;border-color:#D4A96A}
+.fototipo{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;margin:2px}
+.check{display:flex;gap:8px;align-items:center;margin:6px 0;font-size:13px}
+.check input{width:18px;height:18px}
 </style>
 </head>
 <body>
-<div class="top"><h1 style="margin:0">🎨 CATALISE ML + PESO</h1><span style="font-size:11px;opacity:.6">Primer 8:1 | Verniz 2:1</span></div>
+<div style="max-width:460px;margin:auto">
+<div class="logo">A COR DO PECADO</div>
+<div class="sub">BRONZEAMENTO & ESTÉTICA</div>
 
+<div class="tab">
+<button class="tabBtn ativo" onclick="aba('hoje',this)">HOJE</button>
+<button class="tabBtn" onclick="aba('agenda',this)">AGENDA</button>
+<button class="tabBtn" onclick="aba('clientes',this)">CLIENTES</button>
+<button class="tabBtn" onclick="aba('anamnese',this)">ANAMNESE</button>
+<button class="tabBtn" onclick="aba('estoque',this)">ESTOQUE</button>
+<button class="tabBtn" onclick="aba('financeiro',this)">FINANCEIRO</button>
+</div>
+
+<div id="t-hoje" class="aba">
+<div class="card" style="background:radial-gradient(at 50% 0%,#3A2516,#1E1610)">
+<div class="top">🔥 SESSÃO AO VIVO</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;margin:8px 0">
+<div><div style="font-size:22px;font-weight:900" id="qHoje">0</div><small style="color:#C9A87C">Sessões</small></div>
+<div><div style="font-size:22px;font-weight:900;color:#D4A96A" id="fHoje">R$ 0</div><small style="color:#C9A87C">Faturado</small></div>
+<div><div style="font-size:22px;font-weight:900" id="cHoje">0</div><small style="color:#C9A87C">Clientes</small></div>
+</div>
+<select id="cliSel"></select>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+<select id="tipoBronze"><option>Máquina Bronze</option><option>Sol + Fita Isolante</option><option>Spray / Jato</option><option>Gel + Máquina</option><option>Bronze a Vapor</option></select>
+<input id="tempo" type="number" placeholder="Min (30)">
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+<input id="valorSess" type="number" placeholder="Valor R$"><select id="pag"><option>Pix</option><option>Cartão</option><option>Dinheiro</option><option>Pacote</option></select>
+</div>
+<input id="obsSess" placeholder="Ex: biquíni PP, paradi forte, marquinha fina">
+<button class="btn btn-gold" onclick="novaSessao()">INICIAR BRONZE <span id="timerBtn">⏱️</span></button>
+<div id="timerBox" style="display:none;text-align:center;margin-top:12px;border:1px dashed #3A2A1E;border-radius:16px;padding:12px">
+<div class="timer" id="timer">00:00</div>
+<small style="color:#C9A87C">Cabine 1 - Cliente em bronzeamento</small>
+<button class="btn btn-dark" onclick="pararTimer()" style="margin-top:8px">⏹️ FINALIZAR E LIBERAR CABINE</button>
+</div>
+<div id="listaHoje" style="margin-top:12px"></div>
+</div>
+</div>
+
+<div id="t-agenda" class="aba" style="display:none">
 <div class="card">
-<label>PRODUTO</label>
-<select id="produto" onchange="mudaProd()"><option value="8:1">Primer PU - 8:1</option><option value="2:1" selected>Verniz PU - 2:1</option><option value="4:1">Tinta PU - 4:1</option><option value="custom">Personalizado</option></select>
-<div id="customBox" style="display:none" class="row"><input id="cA" type="number" value="2" oninput="calc()">:<input id="cB" type="number" value="1" oninput="calc()"></div>
-
-<label>UNIDADE</label>
-<select id="unidade" onchange="calc()"><option value="g">PESO - Gramas (balança)</option><option value="ml" selected>VOLUME - ML (copo)</option></select>
-
-<label>TOTAL QUE QUERO PREPARAR</label>
-<div class="row"><input id="totalD" type="number" value="500" oninput="calc()"><span id="lblUnid" style="padding-top:16px;width:60px;font-weight:800">ML</span></div>
-
-<div class="row"><div style="flex:1"><label>Dens. Base g/ml</label><input id="densB" type="number" step="0.01" value="0.95" oninput="calc()"></div><div style="flex:1"><label>Dens. Cat g/ml</label><input id="densC" type="number" step="0.01" value="1.02" oninput="calc()"></div><div style="flex:1"><label>Dens. Thinner</label><input id="densT" type="number" step="0.01" value="0.87" oninput="calc()"></div></div>
-
-<label>Thinner %</label>
-<select id="thin" onchange="calc()"><option value="0">0%</option><option value="10">10%</option><option value="20" selected>20%</option><option value="30">30%</option></select>
+<div class="top">📅 AGENDAMENTO COM HORÁRIO</div>
+<input id="dataAgenda" type="date">
+<div style="margin:10px 0"><small style="color:#C9A87C">Horários (clique pra ocupar)</small><br>
+<div id="horarios"></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+<select id="cliAgenda"></select>
+<select id="tipoAgenda"><option>Máquina</option><option>Sol</option><option>Spray</option></select>
+</div>
+<button class="btn btn-gold" onclick="agendar()">AGENDAR HORÁRIO</button>
+<div id="listaAgendaDia" style="margin-top:10px"></div>
+<div style="margin-top:14px"><div class="top">⚠️ Retornos / Pacotes acabando</div><div id="listaRetorno"></div></div>
+</div>
 </div>
 
-<div class="result">
-<div style="font-size:11px;opacity:.6" id="resTitle">PARA 500 ML</div>
-<div class="line"><span>Base</span><b id="rBase">-</b></div>
-<div class="line" style="color:#8CC48B"><span>Catalisador</span><b id="rCat">-</b></div>
-<div class="line"><span>Thinner</span><b id="rThin">-</b></div>
-<div class="line" style="border:0"><span>TOTAL</span><b id="rTotal" class="big">-</b></div>
-<div style="font-size:12px;opacity:.8;margin-top:10px;background:rgba(233,213,181,.1);padding:10px;border-radius:10px" id="instr"></div>
-<button class="btn" onclick="salvar()">💾 SALVAR</button>
+<div id="t-clientes" class="aba" style="display:none">
+<div class="card">
+<div class="top">👩🏽 NOVA CLIENTE</div>
+<input id="nomeCli" placeholder="Nome completo">
+<input id="telCli" placeholder="WhatsApp com DDD">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+<select id="fotoTipo"><option value="1">I - Muito clara</option><option value="2">II - Clara</option><option value="3" selected>III - Morena clara</option><option value="4">IV - Morena</option><option value="5">V - Negra clara</option><option value="6">VI - Negra</option></select>
+<select id="pacoteCli"><option value="avulsa">Avulsa R$80</option><option value="5x">5x R$350</option><option value="10x">10x R$600</option><option value="mensal">Mensal R$500</option></select>
+</div>
+<button class="btn btn-gold" onclick="addCliente()">SALVAR CLIENTE + FICHA</button>
+<div id="listaClientes" style="margin-top:12px"></div>
+</div>
 </div>
 
-<div class="card"><b>Histórico</b><div id="hist"></div></div>
+<div id="t-anamnese" class="aba" style="display:none">
+<div class="card">
+<div class="top">📋 FICHA DE ANAMNESE - A COR DO PECADO</div>
+<small style="color:#C9A87C">Preencha antes do primeiro bronze</small>
+<select id="anaCli"></select>
+<textarea id="anaQueixa" placeholder="Queixa principal / expectativa de bronze"></textarea>
+<div style="margin-top:8px">
+<label class="check"><input type="checkbox" id="anaGest"> Gestante ou amamentando?</label>
+<label class="check"><input type="checkbox" id="anaAlergia"> Alergia a cosméticos / paradi?</label>
+<label class="check"><input type="checkbox" id="anaAcido"> Usa ácido / roacutan / peeling nos últimos 30 dias?</label>
+<label class="check"><input type="checkbox" id="anaDiab"> Diabetes / hipertensão?</label>
+<label class="check"><input type="checkbox" id="anaCancer"> Histórico de câncer de pele?</label>
+<label class="check"><input type="checkbox" id="anaSol"> Tomou sol nas últimas 24h?</label>
+<label class="check"><input type="checkbox" id="anaDepil"> Depilação / esfoliação nas últimas 24h?</label>
+</div>
+<input id="anaMed" placeholder="Medicações em uso">
+<textarea id="anaObs" placeholder="Observações da pele, manchas, tatuagens, etc"></textarea>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+<input id="anaResp" placeholder="Responsável / profissional">
+<input id="anaData" type="date">
+</div>
+<div style="border:1px dashed #3A2A1E;border-radius:12px;padding:10px;margin-top:8px;text-align:center">
+<small style="color:#C9A87C">Termo: Cliente declara que as informações são verdadeiras e autoriza o procedimento de bronzeamento.</small><br>
+<label class="check" style="justify-content:center;margin-top:6px"><input type="checkbox" id="anaTermo"> Li e aceito o termo</label>
+</div>
+<button class="btn btn-gold" onclick="salvarAnamnese()">SALVAR ANAMNESE + ASSINATURA</button>
+<div id="listaAnamnese" style="margin-top:10px"></div>
+</div>
+</div>
 
+<div id="t-estoque" class="aba" style="display:none">
+<div class="card">
+<div class="top">🧴 ESTOQUE PREMIUM</div>
+<div id="listaEstoque"></div>
+<div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px;margin-top:8px">
+<input id="prodNome" placeholder="Produto"><input id="prodQtd" type="number" placeholder="Qtd"><input id="prodVal" type="number" placeholder="R$">
+</div>
+<button class="btn btn-dark" onclick="addProd()">Adicionar</button>
+</div>
+</div>
+
+<div id="t-financeiro" class="aba" style="display:none">
+<div class="card">
+<div class="top">💰 FINANCEIRO - META DOURADA</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center;margin:10px 0">
+<div><div style="font-size:22px;font-weight:900;color:#D4A96A" id="fatMes">R$ 0</div><small>Este mês</small></div>
+<div><div style="font-size:22px;font-weight:900" id="lucroMes">R$ 0</div><small>Lucro</small></div>
+</div>
+<div style="height:10px;background:#211912;border-radius:10px;overflow:hidden"><div id="barMeta" style="height:100%;background:linear-gradient(90deg,#D4A96A,#FFF2CC);width:0%"></div></div>
+<div class="row"><span>Meta mês</span><input id="metaMes" style="width:110px" type="number" value="4000" oninput="calc()"></div>
+<div id="graficoMes"></div>
+<div style="display:flex;gap:6px;margin-top:10px"><button class="btn btn-dark" style="flex:1" onclick="exportar()">💾 Backup JSON</button><button class="btn btn-dark" style="flex:1" onclick="exportarCSV()">📊 Excel</button></div>
+</div>
+</div>
+
+</div>
 <script>
-let hist=JSON.parse(localStorage.getItem('cat_ml')||'[]');
-function mudaProd(){
- let v=document.getElementById('produto').value;
- document.getElementById('customBox').style.display=v=='custom'?'flex':'none';
- if(v=='8:1'){document.getElementById('densB').value=1.30; document.getElementById('densC').value=1.10;}
- if(v=='2:1'){document.getElementById('densB').value=0.95; document.getElementById('densC').value=1.02;}
- if(v=='4:1'){document.getElementById('densB').value=1.15; document.getElementById('densC').value=0.98;}
- calc();
+let D=JSON.parse(localStorage.getItem('pecado_premium_v2')||'null');
+if(!D){D={clientes:[{id:1,nome:'Camila Exemplo',tel:'21999999999',foto:'3',pacote:'5x',rest:4}],sessoes:[],agendas:[],anamneses:[],produtos:[{nome:'Paradi Ativador Premium',qtd:3,val:65},{nome:'Biquíni Fita Isolante P/M/G',qtd:30,val:8},{nome:'Óleo Bronze Coco',qtd:2,val:35},{nome:'Esfoliante Pré-Bronze',qtd:2,val:40}],meta:4000}}
+const $=id=>document.getElementById(id), fmt=v=>'R$ '+v.toFixed(0);
+let selHora=null, timerInt=null, sec=0;
+function aba(n,el){document.querySelectorAll('.aba').forEach(a=>a.style.display='none');document.getElementById('t-'+n).style.display='block';document.querySelectorAll('.tabBtn').forEach(b=>b.classList.remove('ativo'));el.classList.add('ativo');calc();}
+function save(){localStorage.setItem('pecado_premium_v2',JSON.stringify(D));}
+
+function gerarHorarios(){let h=$('horarios'); h.innerHTML=''; let ocupadas=D.agendas.filter(a=>a.data==$('dataAgenda').value).map(a=>a.hora); for(let i=8;i<=19;i++){for(let m of [0,30]){let hr=`${String(i).padStart(2,'0')}:${m==0?'00':'30'}`; let occ=ocupadas.includes(hr); h.innerHTML+=`<span class="hour ${occ?'ocupado':''} ${selHora==hr?'ativo':''}" onclick="${occ?'':'selHoraHora(this,\''+hr+'\')'}">${hr}</span>`;}}}
+
+function selHoraHora(el,hr){document.querySelectorAll('.hour').forEach(x=>x.classList.remove('ativo'));el.classList.add('ativo');selHora=hr;}
+
+function addCliente(){let nome=$('nomeCli').value||'Cliente',tel=$('telCli').value||'',foto=$('fotoTipo').value,pac=$('pacoteCli').value,rest=pac=='5x'?5:pac=='10x'?10:pac=='mensal'?30:1; D.clientes.push({id:Date.now(),nome,tel,foto,pacote:pac,rest});$('nomeCli').value='';$('telCli').value='';save();calc();alert('Cliente salva! Agora preencha a anamnese na aba ANAMNESE');}
+
+function salvarAnamnese(){
+let cliId=parseInt($('anaCli').value); if(!cliId) return alert('Selecione cliente'); if(!$('anaTermo').checked) return alert('Aceite o termo');
+let cli=D.clientes.find(c=>c.id==cliId);
+D.anamneses.push({id:Date.now(),cliId,cliNome:cli.nome,queixa:$('anaQueixa').value,gest:$('anaGest').checked,alergia:$('anaAlergia').checked,acido:$('anaAcido').checked,diab:$('anaDiab').checked,cancer:$('anaCancer').checked,sol:$('anaSol').checked,depil:$('anaDepil').checked,med:$('anaMed').value,obs:$('anaObs').value,resp:$('anaResp').value,data:$('anaData').value||new Date().toISOString().slice(0,10),termo:true});
+save();calc();alert('Anamnese salva com assinatura! ✅');
 }
-function getRatio(){let v=document.getElementById('produto').value; if(v=='custom'){return {a:parseFloat(document.getElementById('cA').value)||1,b:parseFloat(document.getElementById('cB').value)||1,label:'Custom'}} let s=v.split(':'); return {a:parseFloat(s[0]),b:parseFloat(s[1]),label:document.getElementById('produto').selectedOptions[0].text}}
+
+function novaSessao(){
+let cliId=parseInt($('cliSel').value); if(!cliId) return alert('Selecione cliente');
+let ana=D.anamneses.find(a=>a.cliId==cliId); if(!ana) return alert('⚠️ Cliente sem anamnese! Preencha na aba ANAMNESE antes');
+let cli=D.clientes.find(c=>c.id==cliId); let tipo=$('tipoBronze').value, tempo=parseInt($('tempo').value)||30, valor=parseFloat($('valorSess').value)||80, pag=$('pag').value, obs=$('obsSess').value;
+D.sessoes.push({id:Date.now(),cliId,cliNome:cli.nome,tipo,tempo,valor,pag,obs,data:new Date().toISOString(),dia:new Date().toISOString().slice(0,10),hora:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})});
+if(cli.rest>0) cli.rest--; sec=tempo*60; $('timerBox').style.display='block'; iniciarTimer(); $('valorSess').value='';$('obsSess').value='';save();calc();
+}
+function iniciarTimer(){if(timerInt) clearInterval(timerInt); timerInt=setInterval(()=>{sec--; if(sec<=0){clearInterval(timerInt); alert('🔥 BRONZE FINALIZADO! Liberar cabine'); sec=0;} let m=Math.floor(sec/60).toString().padStart(2,'0'), s=(sec%60).toString().padStart(2,'0'); $('timer').innerText=`${m}:${s}`; $('timerBtn').innerText=`${m}:${s}`;},1000);}
+function pararTimer(){clearInterval(timerInt); $('timerBox').style.display='none'; $('timerBtn').innerText='⏱️';}
+
+function agendar(){let data=$('dataAgenda').value, hora=selHora, cliId=parseInt($('cliAgenda').value), tipo=$('tipoAgenda').value; if(!data||!hora||!cliId) return alert('Selecione data, hora e cliente'); let cli=D.clientes.find(c=>c.id==cliId); D.agendas.push({id:Date.now(),data,hora,cliId,cliNome:cli.nome,tipo,tel:cli.tel}); selHora=null; save(); calc(); alert(`Agendado ${data} às ${hora} - ${cli.nome}`);}
+
 function calc(){
- let ratio=getRatio(); let unid=document.getElementById('unidade').value; let totalD=parseFloat(document.getElementById('totalD').value)||0;
- let thin=parseFloat(document.getElementById('thin').value)||0;
- let dB=parseFloat(document.getElementById('densB').value)||1; let dC=parseFloat(document.getElementById('densC').value)||1; let dT=parseFloat(document.getElementById('densT').value)||0.87;
- document.getElementById('lblUnid').innerText=unid.toUpperCase(); document.getElementById('resTitle').innerText='PARA '+totalD+' '+unid.toUpperCase()+' DE '+ratio.label;
+let hoje=new Date().toISOString().slice(0,10), mes=new Date().toISOString().slice(0,7), dataSel=$('dataAgenda').value||hoje;
+if(!$('dataAgenda').value) $('dataAgenda').value=hoje; if(!$('anaData').value) $('anaData').value=hoje;
 
- let base_g, cat_g, thin_g, total_g, total_ml;
+let sHoje=D.sessoes.filter(s=>s.dia==hoje), sMes=D.sessoes.filter(s=>s.data.slice(0,7)==mes);
+let fatHoje=sHoje.reduce((a,b)=>a+b.valor,0), fatMes=sMes.reduce((a,b)=>a+b.valor,0);
+let custo=D.produtos.reduce((a,b)=>a+b.qtd*b.val*0.05,0);
 
- if(unid=='g'){
-   // quero total em gramas
-   let fator=1+ratio.b/ratio.a; let fatorT=fator*(1+thin/100);
-   base_g=totalD/fatorT; cat_g=base_g*ratio.b/ratio.a; thin_g=(base_g+cat_g)*thin/100;
-   total_g=totalD; total_ml=(base_g/dB)+(cat_g/dC)+(thin_g/dT);
- } else {
-   // quero total em ML - mais complexo, precisa iterar peso
-   // aproximação: volume total = base/dB + cat/dC + thin/dT
-   // base = V *? -> resolve
-   // Vamos calcular proporcional por volume
-   let volBaseFator=1/dB; let volCatFator=(ratio.b/ratio.a)/dC; let volFatorBaseCat=volBaseFator+volCatFator;
-   let volFatorThin=volFatorBaseCat*thin/100;
-   let volFatorTotal=volFatorBaseCat+volFatorThin;
-   base_g=totalD/volFatorTotal;
-   cat_g=base_g*ratio.b/ratio.a;
-   thin_g=(base_g+cat_g)*thin/100;
-   total_g=base_g+cat_g+thin_g;
-   total_ml=totalD;
- }
+$('qHoje').innerText=sHoje.length; $('fHoje').innerText=fmt(fatHoje); $('cHoje').innerText=new Set(sHoje.map(s=>s.cliId)).size;
+$('fatMes').innerText=fmt(fatMes); $('lucroMes').innerText=fmt(fatMes-custo);
+$('barMeta').style.width=Math.min(100,fatMes/(parseInt($('metaMes').value)||4000)*100)+'%';
 
- document.getElementById('rBase').innerText=base_g.toFixed(1)+' g | '+(base_g/dB).toFixed(1)+' ml';
- document.getElementById('rCat').innerText=cat_g.toFixed(1)+' g | '+(cat_g/dC).toFixed(1)+' ml';
- document.getElementById('rThin').innerText=thin_g.toFixed(1)+' g | '+(thin_g/dT).toFixed(1)+' ml';
- document.getElementById('rTotal').innerText=total_g.toFixed(1)+' g | '+total_ml.toFixed(1)+' ml';
- document.getElementById('instr').innerText= unid=='ml'?
-   'No copo graduado: '+ (base_g/dB).toFixed(0)+'ml base + '+(cat_g/dC).toFixed(0)+'ml cat = '+(base_g/dB+cat_g/dC).toFixed(0)+'ml. Depois + '+(thin_g/dT).toFixed(0)+'ml thinner.' :
-   'Na balança: Zere, '+base_g.toFixed(1)+'g base, adicione cat até '+(base_g+cat_g).toFixed(1)+'g, thinner até '+total_g.toFixed(1)+'g';
+let opts=D.clientes.map(c=>`<option value="${c.id}">${c.nome} - ${c.pacote} (${c.rest} rest) - F${c.foto}</option>`).join('');
+$('cliSel').innerHTML=opts; $('cliAgenda').innerHTML=opts; $('anaCli').innerHTML=opts;
+
+$('listaHoje').innerHTML=sHoje.slice().reverse().map(s=>`<div class="row"><div><b>${s.cliNome}</b> • ${s.tipo} ${s.tempo}min • ${s.hora}<br><small style="color:#D4A96A">${s.obs} • ${s.pag} • ${fmt(s.valor)}</small></div><span class="badge">${s.pag}</span></div>`).join('')||'<small style="color:#666">Nenhuma hoje ainda</small>';
+
+let agendaDia=D.agendas.filter(a=>a.data==dataSel).sort((a,b)=>a.hora.localeCompare(b.hora));
+$('listaAgendaDia').innerHTML=agendaDia.map(a=>`<div class="row"><div><b>${a.hora} - ${a.cliNome}</b><br><small>${a.tipo}</small></div><div><a href="https://wa.me/55${a.tel}?text=Oi%20${a.cliNome}!%20Confirmando%20seu%20bronze%20A%20COR%20DO%20PECADO%20dia%20${a.data}%20às%20${a.hora}💛" target="_blank" class="badge" style="text-decoration:none;background:#25D366;color:#000">Zap</a> <span onclick="D.agendas=D.agendas.filter(x=>x.id!=${a.id});save();calc()" style="color:#FF8A8A;cursor:pointer"> ✕</span></div></div>`).join('')||'<small style="color:#666">Nenhum agendamento neste dia</small>';
+
+$('listaRetorno').innerHTML=D.clientes.filter(c=>c.rest<=1).map(c=>`<div class="row"><div>⚠️ <b>${c.nome}</b> pacote acabando (${c.rest})</div><a href="https://wa.me/55${c.tel}?text=Oi%20${c.nome}%20💛%20seu%20pacote%20A%20COR%20DO%20PECADO%20acaba%20logo,%20vamos%20renovar?" target="_blank" class="badge" style="text-decoration:none;background:#25D366;color:#000">Renovar</a></div>`).join('')||'<small style="color:#666">Tudo em dia ✨</small>';
+
+$('listaClientes').innerHTML=D.clientes.slice().reverse().map(c=>`<div class="row"><div><b>${c.nome}</b> <span class="fototipo" style="background:${['#F5E6D3','#E8C4A8','#C99A6B','#A67C52','#7A4A2E','#3D2314'][c.foto-1]};color:${c.foto>3?'#fff':'#000'}">${c.foto}</span><br><small style="color:#D4A96A">${c.pacote} • ${c.rest} sessões • ${c.tel}</small></div><div><a href="https://wa.me/55${c.tel}" target="_blank" class="badge" style="text-decoration:none">Zap</a> <span onclick="if(confirm('Apagar?')){D.clientes=D.clientes.filter(x=>x.id!=${c.id});save();calc()}" style="color:#FF8A8A"> ✕</span></div></div>`).join('');
+
+$('listaAnamnese').innerHTML=D.anamneses.slice().reverse().map(a=>`<div class="row"><div><b>${a.cliNome}</b> - ${a.data}<br><small style="color:#C9A87C">${a.queixa||'Sem queixa'} | Med: ${a.med||'Nenhum'}</small><br><small style="color:${a.gest||a.alergia||a.acido||a.cancer?'#FF8A8A':'#2ECC71'}">${[a.gest?'Gestante':null,a.alergia?'Alergia':null,a.acido?'Ácido/Roacutan':null,a.cancer?'Câncer pele':null,a.sol?'Sol 24h':null].filter(Boolean).join(' • ')||'Nenhuma contraindicação ✅'}</small></div><span class="badge">${a.termo?'✔️ Assinado':''}</span></div>`).join('')||'<small style="color:#666">Nenhuma anamnese</small>';
+
+$('listaEstoque').innerHTML=D.produtos.map((p,i)=>`<div class="row"><div><b>${p.nome}</b><br><small>${p.qtd}x • ${fmt(p.val)}</small></div><div style="display:flex;gap:4px"><span onclick="D.produtos[${i}].qtd++;save();calc()" style="padding:6px;background:#2A1E16;border-radius:8px;cursor:pointer">+</span><span onclick="if(D.produtos[${i}].qtd>0){D.produtos[${i}].qtd--;save();calc()}" style="padding:6px;background:#2A1E16;border-radius:8px;cursor:pointer">-</span></div></div>`).join('');
+
+$('graficoMes').innerHTML=sMes.slice(-10).reverse().map(s=>`<div class="row"><span>${s.dia.slice(8,10)}/${s.dia.slice(5,7)} ${s.hora} • ${s.cliNome} • ${s.tipo}</span><b style="color:#D4A96A">${fmt(s.valor)}</b></div>`).join('');
+
+gerarHorarios(); save();
 }
-function salvar(){let r=document.getElementById('rTotal').innerText; let prod=document.getElementById('produto').selectedOptions[0].text; let tot=document.getElementById('totalD').value+document.getElementById('unidade').value; hist.unshift({hora:new Date().toLocaleTimeString('pt-BR'), prod:prod, tot:tot, det:r}); localStorage.setItem('cat_ml',JSON.stringify(hist.slice(0,20))); render(); calc();}
-function render(){let h=''; hist.forEach(x=>{h+='<div style="background:#232734;padding:10px;border-radius:12px;margin-top:8px;font-size:12px;border-left:3px solid #E9D5B5"><b>'+x.prod+' - '+x.tot+'</b> - '+x.hora+'<br>'+x.det+'</div>'}); document.getElementById('hist').innerHTML=h||'Vazio';}
-mudaProd(); render();
+function addProd(){let n=$('prodNome').value||'Produto',q=parseInt($('prodQtd').value)||1,v=parseFloat($('prodVal').value)||0;D.produtos.push({nome:n,qtd:q,val:v});$('prodNome').value='';$('prodQtd').value='';$('prodVal').value='';save();calc();}
+function exportar(){let b=new Blob([JSON.stringify(D)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='a-cor-do-pecado-premium.json';a.click();}
+function exportarCSV(){let csv='\uFEFFData;Cliente;Tipo;Valor;Pagamento\n'+D.sessoes.map(s=>`${s.dia};${s.cliNome};${s.tipo};${s.valor};${s.pag}`).join('\n');let b=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='a-cor-do-pecado.csv';a.click();}
+$('dataAgenda').addEventListener('change',calc);
+calc();
 </script>
 </body>
 </html>
