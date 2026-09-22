@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catalise Peso Pro ML</title>
+<meta name="theme-color" content="#12131A">
+<style>
+:root{--bg:#12131A;--card:#232734;--card2:#2C303E;--areia:#E9D5B5;--areia2:#C9B896}
+body{font-family:system-ui;background:var(--bg);margin:0;padding:16px;padding-bottom:90px;color:var(--areia)}
+.top{background:var(--card);padding:16px;border-radius:16px;text-align:center;border:1px solid #3A3E4E}
+.card{background:var(--card);border-radius:18px;padding:18px;margin-top:12px;border:1px solid #3A3E4E}
+label{font-size:11px;font-weight:800;opacity:.7;margin-top:12px;display:block}
+select,input{width:100%;padding:14px;border-radius:12px;border:1px solid #3A3E4E;background:var(--card2);color:var(--areia);margin-top:6px;box-sizing:border-box;font-size:16px}
+.row{display:flex;gap:10px}
+.result{background:linear-gradient(135deg,#2C303E,#343848);border:1px solid var(--areia2);border-radius:18px;padding:20px;margin-top:14px}
+.big{font-size:28px;font-weight:900}
+.line{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(233,213,181,.1);font-size:14px}
+.btn{width:100%;background:var(--areia);color:#12131A;border:0;padding:16px;border-radius:14px;font-weight:900;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="top"><h1 style="margin:0">🎨 CATALISE ML + PESO</h1><span style="font-size:11px;opacity:.6">Primer 8:1 | Verniz 2:1</span></div>
+
+<div class="card">
+<label>PRODUTO</label>
+<select id="produto" onchange="mudaProd()"><option value="8:1">Primer PU - 8:1</option><option value="2:1" selected>Verniz PU - 2:1</option><option value="4:1">Tinta PU - 4:1</option><option value="custom">Personalizado</option></select>
+<div id="customBox" style="display:none" class="row"><input id="cA" type="number" value="2" oninput="calc()">:<input id="cB" type="number" value="1" oninput="calc()"></div>
+
+<label>UNIDADE</label>
+<select id="unidade" onchange="calc()"><option value="g">PESO - Gramas (balança)</option><option value="ml" selected>VOLUME - ML (copo)</option></select>
+
+<label>TOTAL QUE QUERO PREPARAR</label>
+<div class="row"><input id="totalD" type="number" value="500" oninput="calc()"><span id="lblUnid" style="padding-top:16px;width:60px;font-weight:800">ML</span></div>
+
+<div class="row"><div style="flex:1"><label>Dens. Base g/ml</label><input id="densB" type="number" step="0.01" value="0.95" oninput="calc()"></div><div style="flex:1"><label>Dens. Cat g/ml</label><input id="densC" type="number" step="0.01" value="1.02" oninput="calc()"></div><div style="flex:1"><label>Dens. Thinner</label><input id="densT" type="number" step="0.01" value="0.87" oninput="calc()"></div></div>
+
+<label>Thinner %</label>
+<select id="thin" onchange="calc()"><option value="0">0%</option><option value="10">10%</option><option value="20" selected>20%</option><option value="30">30%</option></select>
+</div>
+
+<div class="result">
+<div style="font-size:11px;opacity:.6" id="resTitle">PARA 500 ML</div>
+<div class="line"><span>Base</span><b id="rBase">-</b></div>
+<div class="line" style="color:#8CC48B"><span>Catalisador</span><b id="rCat">-</b></div>
+<div class="line"><span>Thinner</span><b id="rThin">-</b></div>
+<div class="line" style="border:0"><span>TOTAL</span><b id="rTotal" class="big">-</b></div>
+<div style="font-size:12px;opacity:.8;margin-top:10px;background:rgba(233,213,181,.1);padding:10px;border-radius:10px" id="instr"></div>
+<button class="btn" onclick="salvar()">💾 SALVAR</button>
+</div>
+
+<div class="card"><b>Histórico</b><div id="hist"></div></div>
+
+<script>
+let hist=JSON.parse(localStorage.getItem('cat_ml')||'[]');
+function mudaProd(){
+ let v=document.getElementById('produto').value;
+ document.getElementById('customBox').style.display=v=='custom'?'flex':'none';
+ if(v=='8:1'){document.getElementById('densB').value=1.30; document.getElementById('densC').value=1.10;}
+ if(v=='2:1'){document.getElementById('densB').value=0.95; document.getElementById('densC').value=1.02;}
+ if(v=='4:1'){document.getElementById('densB').value=1.15; document.getElementById('densC').value=0.98;}
+ calc();
+}
+function getRatio(){let v=document.getElementById('produto').value; if(v=='custom'){return {a:parseFloat(document.getElementById('cA').value)||1,b:parseFloat(document.getElementById('cB').value)||1,label:'Custom'}} let s=v.split(':'); return {a:parseFloat(s[0]),b:parseFloat(s[1]),label:document.getElementById('produto').selectedOptions[0].text}}
+function calc(){
+ let ratio=getRatio(); let unid=document.getElementById('unidade').value; let totalD=parseFloat(document.getElementById('totalD').value)||0;
+ let thin=parseFloat(document.getElementById('thin').value)||0;
+ let dB=parseFloat(document.getElementById('densB').value)||1; let dC=parseFloat(document.getElementById('densC').value)||1; let dT=parseFloat(document.getElementById('densT').value)||0.87;
+ document.getElementById('lblUnid').innerText=unid.toUpperCase(); document.getElementById('resTitle').innerText='PARA '+totalD+' '+unid.toUpperCase()+' DE '+ratio.label;
+
+ let base_g, cat_g, thin_g, total_g, total_ml;
+
+ if(unid=='g'){
+   // quero total em gramas
+   let fator=1+ratio.b/ratio.a; let fatorT=fator*(1+thin/100);
+   base_g=totalD/fatorT; cat_g=base_g*ratio.b/ratio.a; thin_g=(base_g+cat_g)*thin/100;
+   total_g=totalD; total_ml=(base_g/dB)+(cat_g/dC)+(thin_g/dT);
+ } else {
+   // quero total em ML - mais complexo, precisa iterar peso
+   // aproximação: volume total = base/dB + cat/dC + thin/dT
+   // base = V *? -> resolve
+   // Vamos calcular proporcional por volume
+   let volBaseFator=1/dB; let volCatFator=(ratio.b/ratio.a)/dC; let volFatorBaseCat=volBaseFator+volCatFator;
+   let volFatorThin=volFatorBaseCat*thin/100;
+   let volFatorTotal=volFatorBaseCat+volFatorThin;
+   base_g=totalD/volFatorTotal;
+   cat_g=base_g*ratio.b/ratio.a;
+   thin_g=(base_g+cat_g)*thin/100;
+   total_g=base_g+cat_g+thin_g;
+   total_ml=totalD;
+ }
+
+ document.getElementById('rBase').innerText=base_g.toFixed(1)+' g | '+(base_g/dB).toFixed(1)+' ml';
+ document.getElementById('rCat').innerText=cat_g.toFixed(1)+' g | '+(cat_g/dC).toFixed(1)+' ml';
+ document.getElementById('rThin').innerText=thin_g.toFixed(1)+' g | '+(thin_g/dT).toFixed(1)+' ml';
+ document.getElementById('rTotal').innerText=total_g.toFixed(1)+' g | '+total_ml.toFixed(1)+' ml';
+ document.getElementById('instr').innerText= unid=='ml'?
+   'No copo graduado: '+ (base_g/dB).toFixed(0)+'ml base + '+(cat_g/dC).toFixed(0)+'ml cat = '+(base_g/dB+cat_g/dC).toFixed(0)+'ml. Depois + '+(thin_g/dT).toFixed(0)+'ml thinner.' :
+   'Na balança: Zere, '+base_g.toFixed(1)+'g base, adicione cat até '+(base_g+cat_g).toFixed(1)+'g, thinner até '+total_g.toFixed(1)+'g';
+}
+function salvar(){let r=document.getElementById('rTotal').innerText; let prod=document.getElementById('produto').selectedOptions[0].text; let tot=document.getElementById('totalD').value+document.getElementById('unidade').value; hist.unshift({hora:new Date().toLocaleTimeString('pt-BR'), prod:prod, tot:tot, det:r}); localStorage.setItem('cat_ml',JSON.stringify(hist.slice(0,20))); render(); calc();}
+function render(){let h=''; hist.forEach(x=>{h+='<div style="background:#232734;padding:10px;border-radius:12px;margin-top:8px;font-size:12px;border-left:3px solid #E9D5B5"><b>'+x.prod+' - '+x.tot+'</b> - '+x.hora+'<br>'+x.det+'</div>'}); document.getElementById('hist').innerHTML=h||'Vazio';}
+mudaProd(); render();
+</script>
+</body>
+</html>
