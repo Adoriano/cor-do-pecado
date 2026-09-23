@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agendar - A COR DO PECADO</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;700;900&display=swap');
+*{box-sizing:border-box;font-family:'Inter'}body{margin:0;background:#0D0805;color:#F5E6D3;padding:14px}
+.logo-img{width:100px;height:100px;border-radius:50%;margin:10px auto;display:block;border:2px solid #D4A96A;box-shadow:0 0 20px rgba(212,169,106,.5)}
+.logo-txt{font-family:'Cinzel Decorative';font-size:24px;text-align:center;background:linear-gradient(90deg,#8B5E34,#D4A96A,#FFF2CC,#D4A96A);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card{background:linear-gradient(180deg,#1E1610,#18100B);border:1px solid #3A2A1E;border-radius:22px;padding:18px;margin:12px auto;max-width:440px}
+.top{font-size:11px;letter-spacing:2px;color:#D4A96A;font-weight:900;text-transform:uppercase;margin-bottom:10px}
+input,select{width:100%;background:#211912;border:1px solid #3A2A1E;color:#F5E6D3;border-radius:12px;padding:14px;font-weight:700;margin-top:8px}
+.btn{width:100%;border:0;border-radius:14px;padding:14px;font-weight:900;margin-top:12px;display:block;text-align:center;text-decoration:none}
+.btn-gold{background:linear-gradient(90deg,#D4A96A,#B07D46);color:#000}
+.btn-dark{background:#2A1E16;color:#C9A87C;border:1px solid #3A2A1E}
+.hour{padding:10px 14px;border-radius:12px;border:1px solid #3A2A1E;background:#211912;color:#C9A87C;margin:4px;display:inline-block;font-size:13px;font-weight:800}
+.hour.ocupado{background:#3A1A1A;color:#FF8A8A;text-decoration:line-through;opacity:.5}
+.hour.ativo{background:#D4A96A;color:#000}
+</style>
+</head>
+<body>
+<div style="max-width:460px;margin:auto">
+<img src="logo.png" class="logo-img">
+<div class="logo-txt">A COR DO PECADO</div>
+<div style="font-size:10px;letter-spacing:5px;text-align:center;color:#C9A87C;margin-bottom:14px">LUXURY TANNING STUDIO</div>
+
+<div class="card">
+<div class="top">1. Escolha o dia</div>
+<input id="data" type="date">
+<div id="horarios" style="margin:10px 0"></div>
+</div>
+
+<div class="card">
+<div class="top">2. Seus dados</div>
+<input id="nome" placeholder="Seu nome">
+<input id="zap" placeholder="WhatsApp (DDD + número)">
+<select id="tipo"><option>Máquina - 30min</option><option>Sol + Fita</option><option>Spray</option><option>Gel</option></select>
+<button class="btn btn-gold" onclick="agendarCliente()">CONFIRMAR AGENDAMENTO 💛</button>
+<a href="https://calendar.app.google/H5zdAVbHvePUE2JQ7" target="_blank" class="btn btn-dark">Ver agenda pelo Google</a>
+<p style="font-size:11px;text-align:center;color:#8a7a6a;margin-top:10px">Você receberá a confirmação no WhatsApp</p>
+</div>
+</div>
+
+<script>
+let selHora=null;
+let D=JSON.parse(localStorage.getItem('pecado_final')||'{"agendas":[]}');
+const $=id=>document.getElementById(id);
+function gerar(){
+ let h=$('horarios');h.innerHTML='';let ocup=(D.agendas||[]).filter(a=>a.data==$('data').value).map(a=>a.hora);
+ for(let i=8;i<=19;i++){for(let m of[0,30]){
+   let hr=`${String(i).padStart(2,'0')}:${m==0?'00':'30'}`;
+   let occ=ocup.includes(hr);
+   h.innerHTML+=`<span class="hour ${occ?'ocupado':''} ${selHora==hr?'ativo':''}" onclick="${occ?'':'sel(this,\''+hr+'\')'}">${hr}</span>`;
+ }}
+}
+function sel(el,hr){document.querySelectorAll('.hour').forEach(x=>x.classList.remove('ativo'));el.classList.add('ativo');selHora=hr;}
+function agendarCliente(){
+ let data=$('data').value,hora=selHora,nome=$('nome').value,zap=$('zap').value,tipo=$('tipo').value;
+ if(!data||!hora||!nome||!zap) return alert('Preencha dia, horário, nome e WhatsApp');
+ // salva no seu sistema
+ let agenda={id:Date.now(),data,hora,cliNome:nome,tel:zap,tipo,origem:'site-cliente'};
+ D.agendas=D.agendas||[]; D.agendas.push(agenda);
+ localStorage.setItem('pecado_final',JSON.stringify(D));
+ // manda pro seu WhatsApp
+ let msg=`Oi! ✨ Novo agendamento A COR DO PECADO:\n\n👤 ${nome}\n📅 ${data} às ${hora}\n💛 ${tipo}\n📱 ${zap}\n\nConfirma?`;
+ window.open(`https://wa.me/55${zap}?text=${encodeURIComponent('Oi '+nome+'! 💛 Confirmado seu bronze dia '+data+' às '+hora+' na A COR DO PECADO!')}`,'_blank');
+ setTimeout(()=>{ window.open(`https://wa.me/55SEUNUMERO?text=${encodeURIComponent(msg)}`,'_blank'); },800);
+ alert('Agendado com sucesso! 💛');
+}
+let hoje=new Date().toISOString().slice(0,10);$('data').value=hoje;$('data').addEventListener('change',gerar);gerar();
+</script>
+</body>
+</html>
