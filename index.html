@@ -32,7 +32,6 @@ input,select,textarea{width:100%;background:#211912;border:1px solid #3A2A1E;col
 <div style="max-width:460px;margin:auto">
 <div class="logo">A COR DO PECADO</div>
 <div class="sub">BRONZEAMENTO & ESTÉTICA</div>
-
 <div class="tab">
 <button class="tabBtn ativo" onclick="aba('hoje',this)">HOJE</button>
 <button class="tabBtn" onclick="aba('agenda',this)">AGENDA</button>
@@ -41,7 +40,6 @@ input,select,textarea{width:100%;background:#211912;border:1px solid #3A2A1E;col
 <button class="tabBtn" onclick="aba('estoque',this)">ESTOQUE</button>
 <button class="tabBtn" onclick="aba('financeiro',this)">FINANCEIRO</button>
 </div>
-
 <div id="t-hoje" class="aba">
 <div class="card" style="background:radial-gradient(at 50% 0%,#3A2516,#1E1610)">
 <div class="top">🔥 SESSÃO AO VIVO</div>
@@ -68,93 +66,21 @@ input,select,textarea{width:100%;background:#211912;border:1px solid #3A2A1E;col
 <div id="listaHoje" style="margin-top:12px"></div>
 </div>
 </div>
-
 <div id="t-agenda" class="aba" style="display:none">
 <div class="card">
 <div class="top">📅 AGENDAMENTO COM HORÁRIO</div>
 <input id="dataAgenda" type="date">
-<div style="margin:10px 0"><small style="color:#C9A87C">Horários (clique pra ocupar)</small><br>
-<div id="horarios"></div>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-<select id="cliAgenda"></select>
-<select id="tipoAgenda"><option>Máquina</option><option>Sol</option><option>Spray</option></select>
-</div>
+<div style="margin:10px 0"><small style="color:#C9A87C">Horários (clique pra ocupar)</small><br><div id="horarios"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><select id="cliAgenda"></select><select id="tipoAgenda"><option>Máquina</option><option>Sol</option><option>Spray</option></select></div>
 <button class="btn btn-gold" onclick="agendar()">AGENDAR HORÁRIO</button>
 <div id="listaAgendaDia" style="margin-top:10px"></div>
 <div style="margin-top:14px"><div class="top">⚠️ Retornos / Pacotes acabando</div><div id="listaRetorno"></div></div>
 </div>
 </div>
-
-<div id="t-clientes" class="aba" style="display:none">
-<div class="card">
-<div class="top">👩🏽 NOVA CLIENTE</div>
-<input id="nomeCli" placeholder="Nome completo">
-<input id="telCli" placeholder="WhatsApp com DDD">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-<select id="fotoTipo"><option value="1">I - Muito clara</option><option value="2">II - Clara</option><option value="3" selected>III - Morena clara</option><option value="4">IV - Morena</option><option value="5">V - Negra clara</option><option value="6">VI - Negra</option></select>
-<select id="pacoteCli"><option value="avulsa">Avulsa R$80</option><option value="5x">5x R$350</option><option value="10x">10x R$600</option><option value="mensal">Mensal R$500</option></select>
-</div>
-<button class="btn btn-gold" onclick="addCliente()">SALVAR CLIENTE + FICHA</button>
-<div id="listaClientes" style="margin-top:12px"></div>
-</div>
-</div>
-
-<div id="t-anamnese" class="aba" style="display:none">
-<div class="card">
-<div class="top">📋 FICHA DE ANAMNESE - A COR DO PECADO</div>
-<small style="color:#C9A87C">Preencha antes do primeiro bronze</small>
-<select id="anaCli"></select>
-<textarea id="anaQueixa" placeholder="Queixa principal / expectativa de bronze"></textarea>
-<div style="margin-top:8px">
-<label class="check"><input type="checkbox" id="anaGest"> Gestante ou amamentando?</label>
-<label class="check"><input type="checkbox" id="anaAlergia"> Alergia a cosméticos / paradi?</label>
-<label class="check"><input type="checkbox" id="anaAcido"> Usa ácido / roacutan / peeling nos últimos 30 dias?</label>
-<label class="check"><input type="checkbox" id="anaDiab"> Diabetes / hipertensão?</label>
-<label class="check"><input type="checkbox" id="anaCancer"> Histórico de câncer de pele?</label>
-<label class="check"><input type="checkbox" id="anaSol"> Tomou sol nas últimas 24h?</label>
-<label class="check"><input type="checkbox" id="anaDepil"> Depilação / esfoliação nas últimas 24h?</label>
-</div>
-<input id="anaMed" placeholder="Medicações em uso">
-<textarea id="anaObs" placeholder="Observações da pele, manchas, tatuagens, etc"></textarea>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-<input id="anaResp" placeholder="Responsável / profissional">
-<input id="anaData" type="date">
-</div>
-<div style="border:1px dashed #3A2A1E;border-radius:12px;padding:10px;margin-top:8px;text-align:center">
-<small style="color:#C9A87C">Termo: Cliente declara que as informações são verdadeiras e autoriza o procedimento de bronzeamento.</small><br>
-<label class="check" style="justify-content:center;margin-top:6px"><input type="checkbox" id="anaTermo"> Li e aceito o termo</label>
-</div>
-<button class="btn btn-gold" onclick="salvarAnamnese()">SALVAR ANAMNESE + ASSINATURA</button>
-<div id="listaAnamnese" style="margin-top:10px"></div>
-</div>
-</div>
-
-<div id="t-estoque" class="aba" style="display:none">
-<div class="card">
-<div class="top">🧴 ESTOQUE PREMIUM</div>
-<div id="listaEstoque"></div>
-<div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px;margin-top:8px">
-<input id="prodNome" placeholder="Produto"><input id="prodQtd" type="number" placeholder="Qtd"><input id="prodVal" type="number" placeholder="R$">
-</div>
-<button class="btn btn-dark" onclick="addProd()">Adicionar</button>
-</div>
-</div>
-
-<div id="t-financeiro" class="aba" style="display:none">
-<div class="card">
-<div class="top">💰 FINANCEIRO - META DOURADA</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center;margin:10px 0">
-<div><div style="font-size:22px;font-weight:900;color:#D4A96A" id="fatMes">R$ 0</div><small>Este mês</small></div>
-<div><div style="font-size:22px;font-weight:900" id="lucroMes">R$ 0</div><small>Lucro</small></div>
-</div>
-<div style="height:10px;background:#211912;border-radius:10px;overflow:hidden"><div id="barMeta" style="height:100%;background:linear-gradient(90deg,#D4A96A,#FFF2CC);width:0%"></div></div>
-<div class="row"><span>Meta mês</span><input id="metaMes" style="width:110px" type="number" value="4000" oninput="calc()"></div>
-<div id="graficoMes"></div>
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn btn-dark" style="flex:1" onclick="exportar()">💾 Backup JSON</button><button class="btn btn-dark" style="flex:1" onclick="exportarCSV()">📊 Excel</button></div>
-</div>
-</div>
-
+<div id="t-clientes" class="aba" style="display:none"><div class="card"><div class="top">👩🏽 NOVA CLIENTE</div><input id="nomeCli" placeholder="Nome completo"><input id="telCli" placeholder="WhatsApp com DDD"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><select id="fotoTipo"><option value="1">I - Muito clara</option><option value="2">II - Clara</option><option value="3" selected>III - Morena clara</option><option value="4">IV - Morena</option><option value="5">V - Negra clara</option><option value="6">VI - Negra</option></select><select id="pacoteCli"><option value="avulsa">Avulsa R$80</option><option value="5x">5x R$350</option><option value="10x">10x R$600</option><option value="mensal">Mensal R$500</option></select></div><button class="btn btn-gold" onclick="addCliente()">SALVAR CLIENTE + FICHA</button><div id="listaClientes" style="margin-top:12px"></div></div></div>
+<div id="t-anamnese" class="aba" style="display:none"><div class="card"><div class="top">📋 FICHA DE ANAMNESE - A COR DO PECADO</div><small style="color:#C9A87C">Preencha antes do primeiro bronze</small><select id="anaCli"></select><textarea id="anaQueixa" placeholder="Queixa principal / expectativa de bronze"></textarea><div style="margin-top:8px"><label class="check"><input type="checkbox" id="anaGest"> Gestante ou amamentando?</label><label class="check"><input type="checkbox" id="anaAlergia"> Alergia a cosméticos / paradi?</label><label class="check"><input type="checkbox" id="anaAcido"> Usa ácido / roacutan / peeling nos últimos 30 dias?</label><label class="check"><input type="checkbox" id="anaDiab"> Diabetes / hipertensão?</label><label class="check"><input type="checkbox" id="anaCancer"> Histórico de câncer de pele?</label><label class="check"><input type="checkbox" id="anaSol"> Tomou sol nas últimas 24h?</label><label class="check"><input type="checkbox" id="anaDepil"> Depilação / esfoliação nas últimas 24h?</label></div><input id="anaMed" placeholder="Medicações em uso"><textarea id="anaObs" placeholder="Observações da pele, manchas, tatuagens, etc"></textarea><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><input id="anaResp" placeholder="Responsável / profissional"><input id="anaData" type="date"></div><div style="border:1px dashed #3A2A1E;border-radius:12px;padding:10px;margin-top:8px;text-align:center"><small style="color:#C9A87C">Termo: Cliente declara que as informações são verdadeiras e autoriza o procedimento de bronzeamento.</small><br><label class="check" style="justify-content:center;margin-top:6px"><input type="checkbox" id="anaTermo"> Li e aceito o termo</label></div><button class="btn btn-gold" onclick="salvarAnamnese()">SALVAR ANAMNESE + ASSINATURA</button><div id="listaAnamnese" style="margin-top:10px"></div></div></div>
+<div id="t-estoque" class="aba" style="display:none"><div class="card"><div class="top">🧴 ESTOQUE PREMIUM</div><div id="listaEstoque"></div><div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px;margin-top:8px"><input id="prodNome" placeholder="Produto"><input id="prodQtd" type="number" placeholder="Qtd"><input id="prodVal" type="number" placeholder="R$"></div><button class="btn btn-dark" onclick="addProd()">Adicionar</button></div></div>
+<div id="t-financeiro" class="aba" style="display:none"><div class="card"><div class="top">💰 FINANCEIRO - META DOURADA</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center;margin:10px 0"><div><div style="font-size:22px;font-weight:900;color:#D4A96A" id="fatMes">R$ 0</div><small>Este mês</small></div><div><div style="font-size:22px;font-weight:900" id="lucroMes">R$ 0</div><small>Lucro</small></div></div><div style="height:10px;background:#211912;border-radius:10px;overflow:hidden"><div id="barMeta" style="height:100%;background:linear-gradient(90deg,#D4A96A,#FFF2CC);width:0%"></div></div><div class="row"><span>Meta mês</span><input id="metaMes" style="width:110px" type="number" value="4000" oninput="calc()"></div><div id="graficoMes"></div><div style="display:flex;gap:6px;margin-top:10px"><button class="btn btn-dark" style="flex:1" onclick="exportar()">💾 Backup JSON</button><button class="btn btn-dark" style="flex:1" onclick="exportarCSV()">📊 Excel</button></div></div></div>
 </div>
 <script>
 let D=JSON.parse(localStorage.getItem('pecado_premium_v2')||'null');
@@ -163,20 +89,15 @@ const $=id=>document.getElementById(id), fmt=v=>'R$ '+v.toFixed(0);
 let selHora=null, timerInt=null, sec=0;
 function aba(n,el){document.querySelectorAll('.aba').forEach(a=>a.style.display='none');document.getElementById('t-'+n).style.display='block';document.querySelectorAll('.tabBtn').forEach(b=>b.classList.remove('ativo'));el.classList.add('ativo');calc();}
 function save(){localStorage.setItem('pecado_premium_v2',JSON.stringify(D));}
-
 function gerarHorarios(){let h=$('horarios'); h.innerHTML=''; let ocupadas=D.agendas.filter(a=>a.data==$('dataAgenda').value).map(a=>a.hora); for(let i=8;i<=19;i++){for(let m of [0,30]){let hr=`${String(i).padStart(2,'0')}:${m==0?'00':'30'}`; let occ=ocupadas.includes(hr); h.innerHTML+=`<span class="hour ${occ?'ocupado':''} ${selHora==hr?'ativo':''}" onclick="${occ?'':'selHoraHora(this,\''+hr+'\')'}">${hr}</span>`;}}}
-
 function selHoraHora(el,hr){document.querySelectorAll('.hour').forEach(x=>x.classList.remove('ativo'));el.classList.add('ativo');selHora=hr;}
-
 function addCliente(){let nome=$('nomeCli').value||'Cliente',tel=$('telCli').value||'',foto=$('fotoTipo').value,pac=$('pacoteCli').value,rest=pac=='5x'?5:pac=='10x'?10:pac=='mensal'?30:1; D.clientes.push({id:Date.now(),nome,tel,foto,pacote:pac,rest});$('nomeCli').value='';$('telCli').value='';save();calc();alert('Cliente salva! Agora preencha a anamnese na aba ANAMNESE');}
-
 function salvarAnamnese(){
 let cliId=parseInt($('anaCli').value); if(!cliId) return alert('Selecione cliente'); if(!$('anaTermo').checked) return alert('Aceite o termo');
 let cli=D.clientes.find(c=>c.id==cliId);
 D.anamneses.push({id:Date.now(),cliId,cliNome:cli.nome,queixa:$('anaQueixa').value,gest:$('anaGest').checked,alergia:$('anaAlergia').checked,acido:$('anaAcido').checked,diab:$('anaDiab').checked,cancer:$('anaCancer').checked,sol:$('anaSol').checked,depil:$('anaDepil').checked,med:$('anaMed').value,obs:$('anaObs').value,resp:$('anaResp').value,data:$('anaData').value||new Date().toISOString().slice(0,10),termo:true});
 save();calc();alert('Anamnese salva com assinatura! ✅');
 }
-
 function novaSessao(){
 let cliId=parseInt($('cliSel').value); if(!cliId) return alert('Selecione cliente');
 let ana=D.anamneses.find(a=>a.cliId==cliId); if(!ana) return alert('⚠️ Cliente sem anamnese! Preencha na aba ANAMNESE antes');
@@ -186,45 +107,51 @@ if(cli.rest>0) cli.rest--; sec=tempo*60; $('timerBox').style.display='block'; in
 }
 function iniciarTimer(){if(timerInt) clearInterval(timerInt); timerInt=setInterval(()=>{sec--; if(sec<=0){clearInterval(timerInt); alert('🔥 BRONZE FINALIZADO! Liberar cabine'); sec=0;} let m=Math.floor(sec/60).toString().padStart(2,'0'), s=(sec%60).toString().padStart(2,'0'); $('timer').innerText=`${m}:${s}`; $('timerBtn').innerText=`${m}:${s}`;},1000);}
 function pararTimer(){clearInterval(timerInt); $('timerBox').style.display='none'; $('timerBtn').innerText='⏱️';}
-
 function agendar(){let data=$('dataAgenda').value, hora=selHora, cliId=parseInt($('cliAgenda').value), tipo=$('tipoAgenda').value; if(!data||!hora||!cliId) return alert('Selecione data, hora e cliente'); let cli=D.clientes.find(c=>c.id==cliId); D.agendas.push({id:Date.now(),data,hora,cliId,cliNome:cli.nome,tipo,tel:cli.tel}); selHora=null; save(); calc(); alert(`Agendado ${data} às ${hora} - ${cli.nome}`);}
-
 function calc(){
 let hoje=new Date().toISOString().slice(0,10), mes=new Date().toISOString().slice(0,7), dataSel=$('dataAgenda').value||hoje;
 if(!$('dataAgenda').value) $('dataAgenda').value=hoje; if(!$('anaData').value) $('anaData').value=hoje;
-
 let sHoje=D.sessoes.filter(s=>s.dia==hoje), sMes=D.sessoes.filter(s=>s.data.slice(0,7)==mes);
 let fatHoje=sHoje.reduce((a,b)=>a+b.valor,0), fatMes=sMes.reduce((a,b)=>a+b.valor,0);
 let custo=D.produtos.reduce((a,b)=>a+b.qtd*b.val*0.05,0);
-
 $('qHoje').innerText=sHoje.length; $('fHoje').innerText=fmt(fatHoje); $('cHoje').innerText=new Set(sHoje.map(s=>s.cliId)).size;
 $('fatMes').innerText=fmt(fatMes); $('lucroMes').innerText=fmt(fatMes-custo);
 $('barMeta').style.width=Math.min(100,fatMes/(parseInt($('metaMes').value)||4000)*100)+'%';
-
 let opts=D.clientes.map(c=>`<option value="${c.id}">${c.nome} - ${c.pacote} (${c.rest} rest) - F${c.foto}</option>`).join('');
 $('cliSel').innerHTML=opts; $('cliAgenda').innerHTML=opts; $('anaCli').innerHTML=opts;
-
 $('listaHoje').innerHTML=sHoje.slice().reverse().map(s=>`<div class="row"><div><b>${s.cliNome}</b> • ${s.tipo} ${s.tempo}min • ${s.hora}<br><small style="color:#D4A96A">${s.obs} • ${s.pag} • ${fmt(s.valor)}</small></div><span class="badge">${s.pag}</span></div>`).join('')||'<small style="color:#666">Nenhuma hoje ainda</small>';
-
 let agendaDia=D.agendas.filter(a=>a.data==dataSel).sort((a,b)=>a.hora.localeCompare(b.hora));
 $('listaAgendaDia').innerHTML=agendaDia.map(a=>`<div class="row"><div><b>${a.hora} - ${a.cliNome}</b><br><small>${a.tipo}</small></div><div><a href="https://wa.me/55${a.tel}?text=Oi%20${a.cliNome}!%20Confirmando%20seu%20bronze%20A%20COR%20DO%20PECADO%20dia%20${a.data}%20às%20${a.hora}💛" target="_blank" class="badge" style="text-decoration:none;background:#25D366;color:#000">Zap</a> <span onclick="D.agendas=D.agendas.filter(x=>x.id!=${a.id});save();calc()" style="color:#FF8A8A;cursor:pointer"> ✕</span></div></div>`).join('')||'<small style="color:#666">Nenhum agendamento neste dia</small>';
-
 $('listaRetorno').innerHTML=D.clientes.filter(c=>c.rest<=1).map(c=>`<div class="row"><div>⚠️ <b>${c.nome}</b> pacote acabando (${c.rest})</div><a href="https://wa.me/55${c.tel}?text=Oi%20${c.nome}%20💛%20seu%20pacote%20A%20COR%20DO%20PECADO%20acaba%20logo,%20vamos%20renovar?" target="_blank" class="badge" style="text-decoration:none;background:#25D366;color:#000">Renovar</a></div>`).join('')||'<small style="color:#666">Tudo em dia ✨</small>';
-
 $('listaClientes').innerHTML=D.clientes.slice().reverse().map(c=>`<div class="row"><div><b>${c.nome}</b> <span class="fototipo" style="background:${['#F5E6D3','#E8C4A8','#C99A6B','#A67C52','#7A4A2E','#3D2314'][c.foto-1]};color:${c.foto>3?'#fff':'#000'}">${c.foto}</span><br><small style="color:#D4A96A">${c.pacote} • ${c.rest} sessões • ${c.tel}</small></div><div><a href="https://wa.me/55${c.tel}" target="_blank" class="badge" style="text-decoration:none">Zap</a> <span onclick="if(confirm('Apagar?')){D.clientes=D.clientes.filter(x=>x.id!=${c.id});save();calc()}" style="color:#FF8A8A"> ✕</span></div></div>`).join('');
-
 $('listaAnamnese').innerHTML=D.anamneses.slice().reverse().map(a=>`<div class="row"><div><b>${a.cliNome}</b> - ${a.data}<br><small style="color:#C9A87C">${a.queixa||'Sem queixa'} | Med: ${a.med||'Nenhum'}</small><br><small style="color:${a.gest||a.alergia||a.acido||a.cancer?'#FF8A8A':'#2ECC71'}">${[a.gest?'Gestante':null,a.alergia?'Alergia':null,a.acido?'Ácido/Roacutan':null,a.cancer?'Câncer pele':null,a.sol?'Sol 24h':null].filter(Boolean).join(' • ')||'Nenhuma contraindicação ✅'}</small></div><span class="badge">${a.termo?'✔️ Assinado':''}</span></div>`).join('')||'<small style="color:#666">Nenhuma anamnese</small>';
-
 $('listaEstoque').innerHTML=D.produtos.map((p,i)=>`<div class="row"><div><b>${p.nome}</b><br><small>${p.qtd}x • ${fmt(p.val)}</small></div><div style="display:flex;gap:4px"><span onclick="D.produtos[${i}].qtd++;save();calc()" style="padding:6px;background:#2A1E16;border-radius:8px;cursor:pointer">+</span><span onclick="if(D.produtos[${i}].qtd>0){D.produtos[${i}].qtd--;save();calc()}" style="padding:6px;background:#2A1E16;border-radius:8px;cursor:pointer">-</span></div></div>`).join('');
-
 $('graficoMes').innerHTML=sMes.slice(-10).reverse().map(s=>`<div class="row"><span>${s.dia.slice(8,10)}/${s.dia.slice(5,7)} ${s.hora} • ${s.cliNome} • ${s.tipo}</span><b style="color:#D4A96A">${fmt(s.valor)}</b></div>`).join('');
-
 gerarHorarios(); save();
 }
 function addProd(){let n=$('prodNome').value||'Produto',q=parseInt($('prodQtd').value)||1,v=parseFloat($('prodVal').value)||0;D.produtos.push({nome:n,qtd:q,val:v});$('prodNome').value='';$('prodQtd').value='';$('prodVal').value='';save();calc();}
 function exportar(){let b=new Blob([JSON.stringify(D)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='a-cor-do-pecado-premium.json';a.click();}
 function exportarCSV(){let csv='\uFEFFData;Cliente;Tipo;Valor;Pagamento\n'+D.sessoes.map(s=>`${s.dia};${s.cliNome};${s.tipo};${s.valor};${s.pag}`).join('\n');let b=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='a-cor-do-pecado.csv';a.click();}
+
+// --- SINCRONIZAÇÃO COM SUA PLANILHA GOOGLE ---
+const SHEET_URL="https://script.google.com/macros/s/AKfycby-LPdMkimUF5eJlPVf_5SbjlrtD93RayRr1l5SwgZN-kVrq6R-3tFQhxQZsjnSTYgb/exec";
+async function sincronizarPlanilha(){
+ try{
+  let r=await fetch(SHEET_URL); 
+  let lista=await r.json();
+  let mudou=false;
+  lista.forEach(p=>{
+    if(!D.agendas.find(a=>a.data==p.data && a.hora==p.hora && a.cliNome==p.cliNome)){
+      D.agendas.push({id:Date.now()+Math.random(), data:p.data, hora:p.hora, cliId:1, cliNome:p.cliNome, tipo:p.tipo, tel:p.tel});
+      mudou=true;
+    }
+  });
+  if(mudou){ save(); calc(); }
+ }catch(e){ console.log('aguardando planilha',e); }
+}
 $('dataAgenda').addEventListener('change',calc);
+setInterval(sincronizarPlanilha, 10000);
+sincronizarPlanilha();
 calc();
 </script>
 </body>
