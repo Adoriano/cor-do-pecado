@@ -5,74 +5,47 @@
 <title>Agendar - A COR DO PECADO</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;700;900&display=swap');
-*{box-sizing:border-box;font-family:'Inter'}body{margin:0;background:#0D0805;color:#F5E6D3;padding:14px}
-.logo-img{width:100px;height:100px;border-radius:50%;margin:10px auto;display:block;border:2px solid #D4A96A}
-.logo-txt{font-family:'Cinzel Decorative';font-size:24px;text-align:center;background:linear-gradient(90deg,#8B5E34,#D4A96A,#FFF2CC,#D4A96A);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.card{background:#1E1610;border:1px solid #3A2A1E;border-radius:22px;padding:18px;margin:12px auto;max-width:440px}
-.top{font-size:11px;letter-spacing:2px;color:#D4A96A;font-weight:900;text-transform:uppercase}
+*{box-sizing:border-box;font-family:Inter}body{margin:0;background:#0D0805;color:#F5E6D3;padding:14px}
+.logo{width:90px;height:90px;border-radius:50%;margin:10px auto;display:block;border:2px solid #D4A96A}
+.tit{font-family:'Cinzel Decorative';font-size:22px;text-align:center;background:linear-gradient(90deg,#8B5E34,#D4A96A,#FFF2CC,#D4A96A);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card{background:#1E1610;border:1px solid #3A2A1E;border-radius:22px;padding:16px;margin:12px auto;max-width:440px}
 input,select{width:100%;background:#211912;border:1px solid #3A2A1E;color:#F5E6D3;border-radius:12px;padding:14px;font-weight:700;margin-top:8px}
-.btn{width:100%;border:0;border-radius:14px;padding:14px;font-weight:900;margin-top:12px;display:block;text-align:center;text-decoration:none;cursor:pointer}
+.btn{width:100%;border:0;border-radius:14px;padding:16px;font-weight:900;margin-top:12px;cursor:pointer}
 .btn-gold{background:linear-gradient(90deg,#D4A96A,#B07D46);color:#000}
-.hour{padding:10px 14px;border-radius:12px;border:1px solid #3A2A1E;background:#211912;color:#C9A87C;margin:4px;display:inline-block;font-size:13px;font-weight:800;cursor:pointer}
+.hour{padding:10px 14px;border-radius:12px;border:1px solid #3A2A1E;background:#211912;color:#C9A87C;margin:4px;display:inline-block;font-weight:800;cursor:pointer}
 .hour.ativo{background:#D4A96A;color:#000}
-.hour.ocupado{background:#3A1A1A;color:#777;text-decoration:line-through;pointer-events:none}
 </style>
 </head>
 <body>
 <div style="max-width:460px;margin:auto">
-<img src="logo.png" class="logo-img" onerror="this.style.display='none'">
-<div class="logo-txt">A COR DO PECADO</div>
+<img src="logo.png" class="logo" onerror="this.style.display='none'"><div class="tit">A COR DO PECADO</div>
+<div style="text-align:center;color:#8B7355;font-size:12px;margin:8px 0">Agendamento oficial 💛</div>
 <div class="card">
-<div class="top">Escolha dia e hora</div>
-<input id="data" type="date">
-<div id="horarios" style="margin:12px 0;display:flex;flex-wrap:wrap"></div>
-<input id="nome" placeholder="Seu nome">
-<input id="zap" placeholder="Seu WhatsApp">
-<select id="tipo"><option>Máquina - 30min</option><option>Sol + Fita</option><option>Spray</option><option>Gel</option></select>
-<button class="btn btn-gold" onclick="agendar()">CONFIRMAR AGENDAMENTO 💛</button>
+<input id="data" type="date"><div id="horas" style="display:flex;flex-wrap:wrap;margin-top:10px"></div>
+<input id="nome" placeholder="Seu nome completo">
+<input id="zap" placeholder="Seu WhatsApp (com DDD)">
+<select id="tipo"><option>Máquina - 30min</option><option>Sol + Fita</option><option>Spray</option><option>Gel</option><option>Banho de Lua</option></select>
+<button id="btn" class="btn btn-gold" onclick="agendar()">CONFIRMAR AGENDAMENTO 💛</button>
+<div id="ok" style="display:none;text-align:center;padding:20px;color:#D4A96A;font-weight:800">Agendado com sucesso! Te esperamos 💛</div>
 </div>
 </div>
-
 <script>
-let selHora=null;
-const $=id=>document.getElementById(id);
+const SHEET_URL="https://script.google.com/macros/s/AKfycby-LPdMkimUF5eJlPVf_5SbjlrtD93RayRr1l5SwgZN-kVrq6R-3tFQhxQZsjnSTYgb/exec";
 const MEU_ZAP="5521982812343";
-const STORAGE_KEY="pecado_final";
-
-function getDados(){
- try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {agendas:[],clientes:[]} }catch(e){ return {agendas:[],clientes:[]} }
+let sel=null;
+const $=id=>document.getElementById(id);
+function gerar(){let h=$('horas');h.innerHTML='';for(let i=8;i<=19;i++){for(let m of[0,30]){let hr=`${String(i).padStart(2,'0')}:${m==0?'00':'30'}`;h.innerHTML+=`<span class="hour ${sel==hr?'ativo':''}" onclick="selHora(this,'${hr}')">${hr}</span>`;}}}
+function selHora(el,hr){document.querySelectorAll('.hour').forEach(x=>x.classList.remove('ativo'));el.classList.add('ativo');sel=hr;}
+async function agendar(){
+ let data=$('data').value,nome=$('nome').value.trim(),zap=$('zap').value.trim(),tipo=$('tipo').value;
+ if(!data||!sel||!nome||!zap) return alert('Preencha tudo, rainha!');
+ $('btn').innerText='SALVANDO...';$('btn').disabled=true;
+ try{ await fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({data,hora:sel,nome,zap,tipo})}); }catch(e){}
+ let D=JSON.parse(localStorage.getItem('pecado_final')||'{"agendas":[]}'); D.agendas.push({id:Date.now(),data,hora:sel,cliNome:nome,tel:zap,tipo}); localStorage.setItem('pecado_final',JSON.stringify(D));
+ let dataBR=data.split('-').reverse().join('/'); window.open(`https://wa.me/${MEU_ZAP}?text=${encodeURIComponent(`✨ NOVO AGENDAMENTO - A COR DO PECADO\n\n👤 ${nome}\n📅 ${dataBR} às ${sel}\n💛 ${tipo}\n📱 ${zap}\n\nJá salvei no app!`)}`,'_blank');
+ $('ok').style.display='block'; $('btn').innerText='AGENDADO 💛';
 }
-function gerar(){
- let D=getDados();
- let h=$('horarios'); h.innerHTML='';
- let ocup=(D.agendas||[]).filter(a=>a.data==$('data').value).map(a=>a.hora);
- for(let i=8;i<=19;i++){for(let m of[0,30]){
-   let hr=`${String(i).padStart(2,'0')}:${m==0?'00':'30'}`;
-   let occ=ocup.includes(hr);
-   h.innerHTML+=`<span class="hour ${occ?'ocupado':''} ${selHora==hr?'ativo':''}" onclick="${occ?'':'sel(this,\''+hr+'\')'}">${hr}</span>`;
- }}
-}
-function sel(el,hr){document.querySelectorAll('.hour').forEach(x=>x.classList.remove('ativo'));el.classList.add('ativo');selHora=hr;}
-
-function agendar(){
- let data=$('data').value, nome=$('nome').value.trim(), zap=$('zap').value.trim(), tipo=$('tipo').value;
- if(!data||!selHora||!nome||!zap){ alert('Preencha tudo 💛'); return; }
-
- let D=getDados();
- D.agendas=D.agendas||[];
- D.agendas.push({id:Date.now(), data, hora:selHora, cliNome:nome, tel:zap, tipo, origem:'site'});
- localStorage.setItem(STORAGE_KEY, JSON.stringify(D));
-
- let dataBR=data.split('-').reverse().join('/');
- let msg=`✨ NOVO AGENDAMENTO - A COR DO PECADO\n\n👤 ${nome}\n📅 ${dataBR} às ${selHora}\n💛 ${tipo}\n📱 ${zap}\n\nJá salvei no app!`;
- window.open(`https://wa.me/${MEU_ZAP}?text=${encodeURIComponent(msg)}`,'_blank');
- alert('Agendado! Já apareceu no seu app principal 💛');
-}
-
-let hoje=new Date(); hoje.setMinutes(hoje.getMinutes()-hoje.getTimezoneOffset());
-$('data').value=hoje.toISOString().slice(0,10);
-$('data').addEventListener('change',gerar);
-gerar();
+let hoje=new Date();hoje.setMinutes(hoje.getMinutes()-hoje.getTimezoneOffset());$('data').value=hoje.toISOString().slice(0,10);gerar();
 </script>
 </body>
 </html>
